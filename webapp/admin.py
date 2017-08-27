@@ -31,14 +31,31 @@ class AccountAdmin(admin.ModelAdmin):
 class PositionAdmin(admin.ModelAdmin):
     model = Position
     list_display_links = ('id', 'get_owner_name')
-    list_display = ('id', 'get_owner_name', 'get_option_full_name', 'amount', 'payoff', 'status')
+    list_display = ('id',
+                    'get_owner_name',
+                    'get_option_full_name',
+                    'amount',
+                    'payoff',
+                    'status',
+                    'clear_timestamp')
 
     def get_readonly_fields(self, request, obj=None):
-        readonly_fields = (
+        readonly_fields_before_validated = (
             'option', 'account', 'owner', 'status', 'clear_timestamp'
         )
-        if obj:  # editing an existing object
-            return readonly_fields
+        readonly_fields_after_validated = ('id',
+                                           'owner',
+                                           'account',
+                                           'option',
+                                           'amount',
+                                           'payoff',
+                                           'status',
+                                           'clear_timestamp')
+
+        if obj and obj.status == Position.PENDING_PREDICTION:  # editing an existing object
+            return readonly_fields_before_validated
+        elif obj:
+            return readonly_fields_after_validated
         return ()
 
 
@@ -52,7 +69,13 @@ class OptionInline(admin.TabularInline):
 
 class PredictionAdmin(admin.ModelAdmin):
     model = Prediction
-    list_display = ('id', 'content', 'get_options_position', 'status', 'prediction_action')
+    list_display = ('id',
+                    'content',
+                    'get_options_position',
+                    'status',
+                    'get_time_to_open',
+                    'get_time_remaining',
+                    'prediction_action')
     inlines = [OptionInline, ]
 
     def get_admin_url(self, obj):

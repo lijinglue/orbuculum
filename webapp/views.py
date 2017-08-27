@@ -5,13 +5,16 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, View
 from rest_framework import generics
 from rest_framework import permissions
+from rest_framework.decorators import renderer_classes
 from rest_framework.exceptions import NotFound, ValidationError
+from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
 from models import *
 from serializers import *
+from constance import config
 
 
 # TODO move to config
-MINIMUM_POSITION = 10
 
 
 class AccountView(generics.RetrieveAPIView, generics.CreateAPIView):
@@ -80,7 +83,7 @@ class PredictionPositionViews(generics.CreateAPIView, generics.ListAPIView):
                 {'msg': 'Prediction does not exist or is not opened'},
                 9000)
 
-        if amount < MINIMUM_POSITION or amount > account.balance:
+        if amount < config.MINIMUM_POSITION or amount > account.balance:
             raise ValidationError(
                 {'amount': ['insufficient funds']},
                 9000)
@@ -91,6 +94,15 @@ class PredictionPositionViews(generics.CreateAPIView, generics.ListAPIView):
             serializer.save(owner=self.request.user,
                             account=account,
                             option=option)
+
+
+class TopAccountViews(generics.ListAPIView):
+    serializer_class = TopAccountSerializer
+
+    def get_queryset(self):
+        return Account.objects.filter(is_active=True).annotate(
+            profit=(Sum('positions__payoff') - Sum('positions__amount'))
+        ).filter(profit__gte=0).order_by('profit')[:10]
 
 
 class PredictionOptionListViews(generics.ListAPIView):

@@ -63,6 +63,16 @@ class Prediction(models.Model):
         return [' {0}@{1} '.format(opt.content, opt.get_position_bucket()) for opt in
                 self.options.filter(prediction=self)]
 
+    def get_time_to_open(self):
+        return self.start_at - timezone.now()
+
+    get_time_to_open.short_description = 'Time to open'
+
+    def get_time_remaining(self):
+        return self.close_at - timezone.now()
+
+    get_time_remaining.short_description = 'Time Remaining'
+
     class Meta:
         ordering = ('created',)
 

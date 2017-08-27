@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'oauth2_provider',
     'rest_framework',
-    'rest_framework_swagger'
+    'rest_framework_swagger',
+    'constance',
+    'constance.backends.database',
+    'debug_toolbar'
 ]
 
 REST_FRAMEWORK = {
@@ -66,6 +69,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 ]
 
 ROOT_URLCONF = 'MyToDoList.urls'
@@ -144,3 +149,16 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'rest_framework:login'
 LOGOUT_URL = 'rest_framework:logout'
 ADMIN_SITE_HEADER = "PredictionMarket"
+
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+
+CONSTANCE_CONFIG = {
+    'ALLOW_USER_CREATE_ACCOUNT': (True, 'Allow user to create account himself'),
+    'AUTO_CREATE_ACCOUNT': (True, "Automatically create account for new user"),
+    'ACCOUNT_INITIAL_BALANCE': (1000, "the initial balance of a new account"),
+    'MINIMUM_POSITION': (10, 'the smallest position a user can create'),
+}
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]

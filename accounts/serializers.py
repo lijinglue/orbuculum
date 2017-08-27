@@ -22,7 +22,6 @@ class RegistrationUserSerializer(serializers.ModelSerializer):
         )
         user.set_password(validated_data['password'])
         user.save()
-        Account.objects.create(owner=user)
         return user
 
     class Meta:

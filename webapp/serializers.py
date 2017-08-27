@@ -1,11 +1,14 @@
 from rest_framework import serializers
+from accounts.serializers import RespUserSerializer
 from .models import *
-from apps import PdConfig
-#from django.contrib.auth.models import User
+from constance import config
+
+
+# from django.contrib.auth.models import User
 
 
 class PositionSerializer(serializers.ModelSerializer):
-    amount = serializers.FloatField(min_value=PdConfig.MINIMUM_POSITION, required=True)
+    amount = serializers.FloatField(min_value=config.MINIMUM_POSITION, required=True)
     is_cleared = serializers.BooleanField(read_only=True)
     payoff = serializers.FloatField(read_only=True)
 
@@ -24,6 +27,15 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = ('id', 'owner', 'balance', 'isActive', 'positions', 'created')
+
+
+class TopAccountSerializer(serializers.ModelSerializer):
+    owner = RespUserSerializer()
+    profit = serializers.FloatField(read_only=True)
+
+    class Meta:
+        model = Account
+        fields = ('id', 'owner', 'profit')
 
 
 class OptionReqSerializer(serializers.ModelSerializer):

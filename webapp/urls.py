@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^prediction/pid/(?P<pid>[-\w]+)/opt/$', views.PredictionOptionListViews.as_view()),
     url(r'^opt/(?P<oid>[-\w]+)/position$', views.PredictionPositionViews.as_view()),
     url(r'^prediction/admin/validate/(?P<id>[-\w]+)', views.PredictionValidateAdminView.as_view(),
-        name='validate_prediction')
+        name='validate_prediction'),
+    url(r'^top/$', views.TopAccountViews.as_view()),
 ]
