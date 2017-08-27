@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
 from django.core.validators import MinLengthValidator
+from webapp.models import Account
 
 
 class RespUserSerializer(serializers.ModelSerializer):
@@ -21,6 +22,7 @@ class RegistrationUserSerializer(serializers.ModelSerializer):
         )
         user.set_password(validated_data['password'])
         user.save()
+        Account.objects.create(owner=user)
         return user
 
     class Meta:

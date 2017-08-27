@@ -1,0 +1,30 @@
+{% extends 'admin/base.html' %}
+{% block branding %}
+<h1>Validate Prediction(Options)</h1>
+{% endblock %}
+
+{% block content %}
+<div class="module">
+    <form action="" method="post">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{next}}">
+        <input name="prediction" type="hidden" value="{{prediction.id}}">
+        <table style="width: 100%">
+            <caption>{{ prediction.content }}</caption>
+            <table>
+                <tbody>
+                {% for option in prediction.options.all %}
+                <tr class="{% cycle 'row1' 'row2' %}">
+                    <td>{{ option.content }}</td>
+                    <td><input name="opt[]" class="row-check-box" type="checkbox" value="{{option.id}}"/></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </table>
+        <input type="submit" value="Validate Options">
+    </form>
+</div>
+{% endblock %}
+
+

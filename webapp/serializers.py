@@ -1,40 +1,56 @@
 from rest_framework import serializers
-from .models import ToDoItem
-from django.contrib.auth.models import User
+from .models import *
+from apps import PdConfig
+#from django.contrib.auth.models import User
 
 
-class ToDoItemSerializer(serializers.Serializer):
+class PositionSerializer(serializers.ModelSerializer):
+    amount = serializers.FloatField(min_value=PdConfig.MINIMUM_POSITION, required=True)
+    is_cleared = serializers.BooleanField(read_only=True)
+    payoff = serializers.FloatField(read_only=True)
+
+    class Meta:
+        model = Position
+        fields = ('id', 'amount', 'is_cleared', 'payoff')
+
+
+class AccountSerializer(serializers.ModelSerializer):
+    # positions = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    positions = PositionSerializer(many=True)
+    owner = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    balance = serializers.FloatField(default=1000.0, read_only=True)
+    isActive = serializers.BooleanField(default=True, read_only=True)
+
+    class Meta:
+        model = Account
+        fields = ('id', 'owner', 'balance', 'isActive', 'positions', 'created')
+
+
+class OptionReqSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Option
+        fields = ('id', 'content')
+
+
+class OptionRespSerializer(serializers.ModelSerializer):
+    option_bucket = serializers.FloatField()
+
+    class Meta:
+        model = Option
+        fields = ('id', 'content', 'option_bucket')
+
+
+class PredictionSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     owner = serializers.ReadOnlyField(source='owner.id')
-    content = serializers.CharField(required=True, allow_blank=False, max_length=100)
-    isFinished = serializers.BooleanField(required=False)
-    created = serializers.DateTimeField(required=False)
+    options = OptionReqSerializer(many=True)
 
     def create(self, validated_data):
-        """
-        create an item
-        """
-        print validated_data
-        return ToDoItem.objects.create(**validated_data)
-
-    def update(self, instance, validated_data):
-        """
-        update an item
-        """
-        instance.content = validated_data.get('content', instance.content)
-        instance.isFinished = validated_data.get('isFinished', instance.isFinished)
-        instance.save()
-        return instance
+        options_json = validated_data.pop('options')
+        prediction = Prediction.objects.create(**validated_data)
+        options = [Option.objects.create(content=op['content'], prediction=prediction) for op in options_json]
+        return prediction
 
     class Meta:
-        model = ToDoItem
-        fields = ('id', 'owner', 'content', 'isFinished', 'created')
-
-
-class ToDoUserSerializer(serializers.ModelSerializer):
-    toDoItems = serializers.PrimaryKeyRelatedField(many=True, queryset=ToDoItem.objects.all())
-
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'toDoItems')
-
+        model = Prediction
+        fields = ('id', 'owner', 'content', 'start_at', 'created', 'options', 'status')
