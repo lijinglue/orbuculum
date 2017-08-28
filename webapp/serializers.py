@@ -19,14 +19,14 @@ class PositionSerializer(serializers.ModelSerializer):
 
 class AccountSerializer(serializers.ModelSerializer):
     # positions = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    positions = PositionSerializer(many=True)
+    positions = PositionSerializer(many=True, read_only=True)
     owner = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
     balance = serializers.FloatField(default=1000.0, read_only=True)
-    isActive = serializers.BooleanField(default=True, read_only=True)
+    is_active = serializers.BooleanField(default=True, read_only=True)
 
     class Meta:
         model = Account
-        fields = ('id', 'owner', 'balance', 'isActive', 'positions', 'created')
+        fields = ('id', 'owner', 'balance', 'is_active', 'positions', 'created')
 
 
 class TopAccountSerializer(serializers.ModelSerializer):

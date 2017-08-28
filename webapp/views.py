@@ -6,19 +6,24 @@ from django.views.generic import View
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.exceptions import NotFound, ValidationError
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope, IsAuthenticatedOrTokenHasScope
 from django.utils.translation import ugettext_lazy as _
 
 from serializers import *
 from constance import config
 
 
-class AccountView(generics.RetrieveAPIView, generics.CreateAPIView):
+class AccountListView(generics.ListAPIView):
     serializer_class = AccountSerializer
-    permission_classes = (permissions.IsAuthenticated,)
-    lookup_field = 'owner_id'
+    permission_classes = (IsAuthenticatedOrTokenHasScope,)
 
     def get_queryset(self):
         return Account.objects.filter(owner=self.request.user)
+
+
+class AccountCreateView(generics.CreateAPIView):
+    serializer_class = AccountSerializer
+    permission_classes = (IsAuthenticatedOrTokenHasScope,)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -49,7 +54,7 @@ class PredictionUpdate(generics.CreateAPIView, generics.UpdateAPIView):
 
 class PositionViews(generics.ListAPIView):
     serializer_class = PositionSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (IsAuthenticatedOrTokenHasScope,)
 
     def get_queryset(self):
         user = self.request.user
@@ -58,14 +63,15 @@ class PositionViews(generics.ListAPIView):
 
 class PredictionPositionViews(generics.CreateAPIView, generics.ListAPIView):
     serializer_class = PositionSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (IsAuthenticatedOrTokenHasScope,)
 
     def get_queryset(self):
         user = self.request.user
         oid = self.kwargs['oid']
-        option = Option.objects.get(id=oid)
-        if option is None:
-            return NotFound(_('Option not found'))
+        try:
+            option = Option.objects.get(id=oid)
+        except Option.DoesNotExist:
+            raise NotFound(_('Option not found'))
         return Position.objects.filter(owner=user,
                                        option=option)
 
@@ -113,6 +119,7 @@ class PredictionOptionListViews(generics.ListAPIView):
 
 
 class PredictionValidateAdminView(View):
+    permission_classes = (permissions.IsAdminUser,)
     def get(self, request, *args, **kwargs):
         template_name = 'admin/validate_prediction.html'
         prediction = Prediction.objects.get(id=int(kwargs['id']))

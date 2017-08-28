@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'webapp.apps.WebappConfig',
     'accounts.apps.AccountsConfig',
+    'corsheaders',
     'oauth2_provider',
     'rest_framework',
     'rest_framework_swagger',
@@ -70,7 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'MyToDoList.urls'
@@ -158,6 +159,8 @@ CONSTANCE_CONFIG = {
     'ACCOUNT_INITIAL_BALANCE': (1000, "the initial balance of a new account"),
     'MINIMUM_POSITION': (10, 'the smallest position a user can create'),
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 INTERNAL_IPS = [
     '127.0.0.1',

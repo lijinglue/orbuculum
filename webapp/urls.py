@@ -4,7 +4,8 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
-    url(r'^user/(?P<owner_id>[-\w]+)/accounts/$', views.AccountView.as_view()),
+    url(r'^user/accounts/$', views.AccountListView.as_view()),
+    url(r'^user/accounts/create$', views.AccountCreateView.as_view()),
     url(r'^prediction/pid/(?P<pk>[-\w]+)/$', views.PredictionRetrieveById.as_view()),
     url(r'^prediction/list/$', views.PredictionRetrieveAll.as_view()),
     url(r'^prediction/$', views.PredictionUpdate.as_view()),
