@@ -2,19 +2,14 @@
 from __future__ import unicode_literals
 from django.db.models import Sum
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, View
+from django.views.generic import View
 from rest_framework import generics
 from rest_framework import permissions
-from rest_framework.decorators import renderer_classes
 from rest_framework.exceptions import NotFound, ValidationError
-from rest_framework.renderers import JSONRenderer
-from rest_framework.response import Response
-from models import *
+from django.utils.translation import ugettext_lazy as _
+
 from serializers import *
 from constance import config
-
-
-# TODO move to config
 
 
 class AccountView(generics.RetrieveAPIView, generics.CreateAPIView):
@@ -69,13 +64,15 @@ class PredictionPositionViews(generics.CreateAPIView, generics.ListAPIView):
         user = self.request.user
         oid = self.kwargs['oid']
         option = Option.objects.get(id=oid)
+        if option is None:
+            return NotFound(_('Option not found'))
         return Position.objects.filter(owner=user,
                                        option=option)
 
     def perform_create(self, serializer):
         oid = self.kwargs['oid']
         option = Option.objects.get(id=oid)
-        account = Account.objects.get(owner=self.request.user)
+        account = Account.objects.filter(owner=self.request.user).first()
         amount = self.request.data['amount']
 
         if option.prediction.status != Prediction.OPEN:
