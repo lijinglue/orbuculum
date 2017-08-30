@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.conf.urls import url
 
 from django.contrib import admin
 
 # Register your models here.
-from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils.html import format_html
 

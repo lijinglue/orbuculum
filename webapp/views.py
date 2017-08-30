@@ -6,7 +6,7 @@ from django.views.generic import View
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.exceptions import NotFound, ValidationError
-from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope, IsAuthenticatedOrTokenHasScope
+from oauth2_provider.contrib.rest_framework import IsAuthenticatedOrTokenHasScope
 from django.utils.translation import ugettext_lazy as _
 
 from serializers import *
@@ -16,6 +16,7 @@ from constance import config
 class AccountListView(generics.ListAPIView):
     serializer_class = AccountSerializer
     permission_classes = (IsAuthenticatedOrTokenHasScope,)
+    required_scopes = ('read',)
 
     def get_queryset(self):
         return Account.objects.filter(owner=self.request.user)
@@ -24,6 +25,7 @@ class AccountListView(generics.ListAPIView):
 class AccountCreateView(generics.CreateAPIView):
     serializer_class = AccountSerializer
     permission_classes = (IsAuthenticatedOrTokenHasScope,)
+    required_scopes = ('write',)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -55,6 +57,7 @@ class PredictionUpdate(generics.CreateAPIView, generics.UpdateAPIView):
 class PositionViews(generics.ListAPIView):
     serializer_class = PositionSerializer
     permission_classes = (IsAuthenticatedOrTokenHasScope,)
+    required_scopes = ('read',)
 
     def get_queryset(self):
         user = self.request.user
@@ -64,6 +67,7 @@ class PositionViews(generics.ListAPIView):
 class PredictionPositionViews(generics.CreateAPIView, generics.ListAPIView):
     serializer_class = PositionSerializer
     permission_classes = (IsAuthenticatedOrTokenHasScope,)
+    required_scopes = ('read', 'write')
 
     def get_queryset(self):
         user = self.request.user
@@ -110,6 +114,8 @@ class TopAccountViews(generics.ListAPIView):
 
 class PredictionOptionListViews(generics.ListAPIView):
     serializer_class = OptionRespSerializer
+    permission_classes = (IsAuthenticatedOrTokenHasScope,)
+    required_scopes = ('read',)
 
     def get_queryset(self):
         pid = self.kwargs['pid']
@@ -120,6 +126,7 @@ class PredictionOptionListViews(generics.ListAPIView):
 
 class PredictionValidateAdminView(View):
     permission_classes = (permissions.IsAdminUser,)
+
     def get(self, request, *args, **kwargs):
         template_name = 'admin/validate_prediction.html'
         prediction = Prediction.objects.get(id=int(kwargs['id']))
