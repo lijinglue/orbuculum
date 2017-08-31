@@ -1,0 +1,106 @@
+/** CLUB STATS PAGE Club stats page***/
+
+
+.canvas-minutes-big{ height: 500px; background: @match-live-light-base-color; margin-top: 25px; margin-bottom: 70px}
+.ct-chart{ height: 100%;}
+.canvas-investors{ height: 500px;}
+
+/** ATTACKS PER GAME**/
+
+#attack-per-game > .ct-chart-line{ background: @match-live-light-base-color;}
+#attack-per-game > svg > g.ct-grids > line{ stroke:@attack-per-game-path-grid-color;}
+
+/*********************/
+
+
+/** TOURNAMENT PATH**/ 
+
+#tournament-path > .ct-chart-line{ background: @match-live-light-base-color;}
+#tournament-path > svg > g.ct-grids > line{ stroke: @tournament-path-grid-color;}
+
+/*****************/
+
+
+/** SALARY CAP DIAGRAM Salary cap diagram**/
+
+#stackedbar > svg > g > g.ct-series.ct-series-a > line{ stroke: @stackedbar-color-1; /**  first color**/}
+#stackedbar > svg > g > g.ct-series.ct-series-b > line { stroke: @stackedbar-color-2; /** second color**/ }
+#stackedbar > svg > g > g.ct-series.ct-series-c > line{ stroke: @stackedbar-color-3; /** third color**/ }
+#stackedbar > svg > g.ct-grids > line{ stroke:@stackedbar-grid-color;}
+
+/**************************/
+
+
+/** MAIN INVESTORS DIAGRAM**/ 
+
+#gaugechart > svg > g.ct-series.ct-series-a > path { fill: @gaugechart-color-1; /** first color**/}
+#gaugechart > svg > g.ct-series.ct-series-b > path{ fill: @gaugechart-color-2; /** second color**/}
+#gaugechart > svg > g.ct-series.ct-series-c > path{ fill: @gaugechart-color-3; /** third color**/}
+#gaugechart > svg > g.ct-series.ct-series-d > path{ fill: @gaugechart-color-4; /** fourth color**/}
+#gaugechart > svg > g>.ct-label{    fill:@gaugechart-text;}
+#gaugechart > svg > g.ct-grids > line{    stroke:@gaugechart-grid-color;}
+#gaugechart>.ct-legend.ct-legend-inside{position: relative; top:-42%;}
+#gaugechart>.ct-legend.ct-legend-inside li{ padding-left: 40px; margin-bottom: 20px; cursor: pointer;}
+#gaugechart>.ct-legend.ct-legend-inside li.ct-series-0:before{   width: 20px; height: 20px; position: absolute; left: 0; content: ''; border: 3px solid @gaugechart-color-1; border-radius: 10px; background: @gaugechart-color-1; margin-right: 10px;margin-bottom: 10px;}
+#gaugechart>.ct-legend.ct-legend-inside li.ct-series-1:before{   width: 20px; height: 20px; position: absolute; left: 0; content: ''; border: 3px solid @gaugechart-color-2; border-radius: 10px; background: @gaugechart-color-2; margin-right: 10px; margin-bottom: 10px;}
+#gaugechart>.ct-legend.ct-legend-inside li.ct-series-2:before{   width: 20px; height: 20px; position: absolute; left: 0; content: ''; border: 3px solid @gaugechart-color-3; border-radius: 10px; background: @gaugechart-color-3; margin-right: 10px;margin-bottom: 10px;}
+#gaugechart>.ct-legend.ct-legend-inside li.ct-series-3:before{   width: 20px; height: 20px; position: absolute; left: 0; content: ''; border: 3px solid @gaugechart-color-4; border-radius: 10px; background: @gaugechart-color-4; margin-right: 10px;margin-bottom: 10px;}
+#gaugechart>.ct-legend.ct-legend-inside li.inactive:before{background: transparent}
+#gaugechart{top:15%;}
+
+/**********************/
+
+
+/*** RAITINGS  ***/
+
+.svgpath > svg > g > g.ct-series.ct-series-a > path{ stroke: @svgpath-color-1; /** first color **/  }
+.svgpath > svg > g > g.ct-series.ct-series-b > path{ stroke: @svgpath-color-2; /** second color **/  }
+.svgpath > svg > g > g.ct-series.ct-series-c > path{ stroke: @svgpath-color-3; /** third color **/  }
+.svgpath > svg > g.ct-grids > line{ stroke:@svgpath-grid-color;}
+.svgpath > .ct-chart-line{ background-color: @match-live-light-base-color;}
+.svgpath > svg > g > g.ct-series.ct-series-a > path.ct-area{fill:@svgpath-color-1 }
+.svgpath > svg > g > g.ct-series.ct-series-b > path.ct-area{fill:@svgpath-color-2 }
+.svgpath > svg > g > g.ct-series.ct-series-c > path.ct-area{fill:@svgpath-color-3 }
+/***************************/
+
+/** FINANCIAL INDICATORS **/ 
+
+#pickcircle > svg > g > g > line { stroke: @pickcircle-color-1; /**  first color **/}
+#pickcircle > svg > g > g > circle{ fill: @pickcircle-color-2; /**second color **/}
+#pickcircle > svg > g.ct-grids > line{ stroke:@pickcircle-grid-color;}
+
+/*******************************/
+
+/** ATTENDANCE **/
+
+#label_placement > svg > g > g.ct-series.ct-series-a > line{ stroke: #d70206;}
+#label_placement > svg > g > g.ct-series.ct-series-b > line{ stroke: #f05b4f ;}
+#label_placement > svg > g > g.ct-series.ct-series-c > line{ stroke:#f4c63d ;}
+#label_placement > svg > g > g.ct-series.ct-series-d > line{ stroke: #d17905;}
+#label_placement > svg > g > g.ct-series.ct-series-e > line{ stroke: #59922b;}
+#label_placement > svg > g > g.ct-series.ct-series-f > line{ stroke: #9043ad ; }
+#label_placement > svg > g > g.ct-series.ct-series-g > line{ stroke: #0544d3 ;}
+#label_placement > svg > g.ct-grids > line{ stroke:@label_placement-grid-color;}
+
+@media(max-width:768px){
+    #gaugechart{top:12%;}
+    #gaugechart>.ct-legend.ct-legend-inside{position: relative; top:-30%; text-align: center;}
+    #gaugechart>.ct-legend.ct-legend-inside li {    padding-left: 25px;margin-bottom: 20px; cursor: pointer; display: inline-flex; position: relative; padding-right: 20px;}
+}
+
+@media(max-width:425px){
+    .canvas-investors { height: 400px; }
+     #gaugechart>.ct-legend.ct-legend-inside{position: relative; top:-37%; text-align: center;}
+}
+
+@media(max-width:374px){
+    .canvas-investors{height: 400px}
+    #gaugechart{top:-15%;}
+    #gaugechart>.ct-legend.ct-legend-inside{position: relative; top:-39%;}
+}
+
+@media(max-width:350px){
+#stackedbar > svg > g > g.ct-series.ct-series-a > line{ stroke-width:15px !important;}
+#stackedbar > svg > g > g.ct-series.ct-series-b > line{ stroke-width:15px !important;}
+#stackedbar > svg > g > g.ct-series.ct-series-c > line{ stroke-width:15px !important;}
+}

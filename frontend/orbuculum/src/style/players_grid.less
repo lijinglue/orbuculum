@@ -1,0 +1,20 @@
+
+.staff-box h4 { padding-top: 0; }
+.staff-box .item { margin-bottom: 40px; position: relative; display: block; overflow: hidden; transition: all 400ms; height: 360px; width: 100%; }
+.staff-box .item img { width: 100%; height: 100%; object-fit: cover; }
+.staff-box .item:hover { box-shadow: 0px 0px 17px -6px #000; }
+.staff-box .item:hover .info:before { background: @player-info-hover; right: -50px; }
+.staff-box .item:hover .info > * { color: @player-info-hover-text; }
+.staff-box .info { padding: 10px 0 10px 29px; width: 30%; position: absolute; top: 0; left: 0; bottom: -1px; display: block; }
+.staff-box .info:before { content: ''; height: 100%; position: absolute; top: 0; bottom: 0; left: -100%; right: -20px; background: @player-info-background; transform: skew(-10deg); transition: all 400ms; }
+.staff-box .info .name { padding: 16px 0 0; font-size: 16px; line-height: 19px; color: @player-info-name; text-transform: uppercase; font-family: @secondary-font, sans-serif; display: block; position: relative; }
+.staff-box .info .position { padding-top: 3px; color: @player-info-postition; font-size: 10px; text-transform: uppercase; font-family: @secondary-font, sans-serif; display: block; line-height: normal; position: relative; transition: all 400ms; }
+.staff-box .info .number { position: absolute; left: 30px; bottom: 23px; font-size: 24px; color: @player-info-number; display: block; transition: all 400ms; }
+.staff-box .info .role { padding: 4px 9px 4px 10px; font-size: 10px; line-height: normal; text-transform: uppercase; color: @light-alt-color; font-family: @secondary-font, sans-serif; background: @contrast-alt-color; position: relative; }
+.staff-box .info .role span { position: relative; }
+.staff-box .info .role:before { content: ''; width: 100%; background: @contrast-alt-color; transform: skew(-10deg); position: absolute; top: 0; bottom: 0; right: -7px; }
+.staff-box .item:hover .info .role { color: @light-alt-color; }
+
+@media (max-width: 767px) {
+    .staff-box .item { margin: 0px auto 40px; max-width: 360px; }
+} 

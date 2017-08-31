@@ -1,0 +1,31 @@
+.error-page { position: relative; height: 100%; }
+.error-wrap { min-height: 600px; position: absolute; top: 110px; bottom: 110px; left: 0; right: 0; background: url("../images/@{scheme-name}/error-bg.jpg") 50% 50% no-repeat; }
+.error-wrap.offline { background: url("../images/@{scheme-name}/offline-bg.jpg") 50% 50% no-repeat;}
+.error-wrap .error-logo { position: absolute; top: 50%; transform: translateY(-50%); }
+.error-wrap .error-title { position: absolute; left: 0; right: 0; bottom: 40%; }
+.error-wrap .error-title .big-text { font-size: 100px; display: inline-block; text-transform: uppercase; color: @404-big-text; font-family: @sub-font, sans-serif; font-weight: 900; vertical-align: top; line-height: 58px; }
+.error-wrap .error-title .small-text { padding-left: 30px; font-size: 40px; display: inline-block; text-transform: uppercase; color: @404-small-text; font-family: @sub-font, sans-serif; font-weight: 900; line-height: 43px; vertical-align: top; }
+.error-wrap .error-title .back { margin-top: 25px; margin-left: 160px; display: inline-block; font-size: 16px; text-transform: uppercase; color: @404-back; font-family: @secondary-font, sans-serif; }
+.error-wrap .error-title .back i { margin-right: 38px; transition: all 400ms;}
+.error-wrap .error-title .back:hover {}
+.error-wrap .error-title .back:hover i { margin-left: -10px; margin-right: 48px; }
+.error-menu-wrap { position: absolute; left: 0; right: 0; bottom: 0; background: #111111; }
+.error-menu-wrap .error-menu { display: table; width: 100%; text-align: justify; }
+.error-menu-wrap .error-menu li { display: table-cell; text-align: center; }
+.error-menu-wrap .error-menu li a { padding: 42px 0 41px 0; display: block; font-size: 14px; text-transform: uppercase; color: #f2f2f2; font-family: @secondary-font, sans-serif; }
+.error-menu-wrap .error-menu li a:hover { color: #ffcd00; }
+
+@media(max-width:600px){
+    .error-wrap .error-title .big-text { display: block; text-align: center; padding-bottom: 20px; }
+    .error-wrap .error-title .small-text { display: block; padding-left: 0; text-align: center; }
+    .error-wrap .error-title .small-text br { display: none; }
+}
+
+@media (max-width:500px){
+    .error-menu-wrap .error-menu li a { padding: 42px 0 41px 0; display: block; font-size: 10px; text-transform: uppercase; color: #f2f2f2; font-family: @secondary-font, sans-serif; }
+    .error-wrap .error-title .small-text{word-wrap:break-word; white-space: pre; text-align: left;}
+    .error-wrap .error-title .small-text br { display: block; }
+    .error-wrap .error-title .small-text { font-size: 25px; line-height: normal; }
+    .error-wrap .error-title .big-text { font-size: 40px; line-height: normal; }
+
+}

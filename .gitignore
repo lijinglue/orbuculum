@@ -8,3 +8,4 @@ build
 *.egg-info
 static_dist
 *.pyc
+node_modules

@@ -1,0 +1,25 @@
+.players-list-hockey table { width: 100%; margin-bottom: 30px; }
+.players-list-hockey tr th { background: transparent; color: @muted-color; text-transform: uppercase; font-size: 10px; font-family: @secondary-font, sans-serif; }
+.players-list-hockey tr td img { height: 80px; width: 80px; object-fit: cover; }
+.players-list-hockey tr td { background: @light-alt-color; transition: all 400ms;}
+.players-list-hockey tr td .number { padding-top: 7px; border-radius: 10px; height: 30px; width: 32px; display:inline-block; background: @dark-color; color: @light-alt-color; font-size: 12px; font-weight: 700; font-family: @base-font, sans-serif; }
+.players-list-hockey tr td:last-child span { line-height: normal; padding-top: 7px; border-radius: 10px; height: 30px; width: 32px; display:inline-block; background: #f5f5f5; color: @dark-color; font-size: 12px; font-weight: 700; font-family: @base-font, sans-serif; }
+.players-list-hockey tr td .name{ text-transform: uppercase; font-family: @secondary-font, sans-serif; font-size: 12px; color: @dark-color; }
+.players-list-hockey tr td.img { padding-left: 0px; } 
+.players-list-hockey tr th.full-width { width: 100%; }
+.scroll-x { overflow-x: auto;}
+.players-list-hockey tr:hover td:last-child span { background: @match-hover-player-rate-background; color: @light-alt-color; } 
+.players-list-hockey tr:hover td { background: @match-hover-player-table-background; color: @light-alt-color; }
+ .players-list-hockey tr:hover td .name { color: @light-alt-color; }
+.players-list-hockey tr:hover { box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); } 
+.players-list-hockey tr:first-child:hover { background: none; box-shadow: none; }
+.players-list-hockey ul li a { padding: 5px 0 12px 0; display: block; position: relative; font-size: 14px; color: @dark-color; font-family: @secondary-font, sans-serif; text-transform: uppercase;}
+.players-list-hockey ul li a:before { content: ""; position: absolute; width: 0; left: 0; bottom: 0; height: 6px; background: @contrast-alt-color; transition: all 400ms; }
+.players-list-hockey ul li.active a:before, .players-list-hockey ul li:hover a:before { width: 100%; }
+.players-list-hockey ul { padding-bottom: 10px; border: none; padding-left: 0px; }
+.players-list-hockey ul li { padding-right: 30px; display: inline-block; }
+
+.players-list-hockey .nav-tabs>li>a { margin-right: 0px; line-height: normal; border:none; }
+
+.players-list-hockey .nav>li>a:focus, .players-list-hockey .nav>li>a:hover {background: none; border: none; }
+.players-list-hockey .nav-tabs>li.active>a, .players-list-hockey .nav-tabs>li.active>a:focus, .players-list-hockey .nav-tabs>li.active>a:hover{ background: none; border: none; color: initial; }

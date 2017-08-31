@@ -1,0 +1,119 @@
+
+
+td a {
+ color: @dark-color;
+}
+.player-hockey-wrap .circle-item {
+  display: inline-block;
+  width: 100%;
+}
+.player-hockey-wrap .circle-item > .text {
+  color: @muted-color;
+}
+
+.player-hockey-wrap {
+  background-color: @player-header-background;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+} 
+
+.player-hockey-wrap > div p {
+  margin-bottom: 20px;
+}
+.player-hockey-wrap .circle-item {
+  float: none;
+}
+.player-hockey-wrap .stats {
+  position: relative;
+  padding: 30px;
+}
+.player-hockey-wrap:before {
+  position: absolute;
+  content: "";
+  background-color: @player-header-before-background;
+  top: 0;
+  bottom: 0;
+  left: -100%;
+  right: 75%;
+  transform: skew(-10deg);
+}
+.canvas {
+  position: relative;
+  margin: 10px;
+  margin-top: 20px;
+}
+.canvas-minutes {
+  padding-top: 20px;
+  margin-bottom: 20px;
+  background: @match-live-light-base-color;
+}
+.background-section {
+  background: @match-live-light-base-color;
+  padding: 35px 20px 37px;
+}
+.player-hockey-wrap .number {
+  color: @contrast-color;
+  font-size: 40px;
+  font-family: @secondary-font;
+}
+.player-hockey-wrap .name {
+  font-family: @secondary-font;
+  color:@dark-color;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+.player-hockey-wrap .country {
+  font-size: 10px;
+  font-family: @secondary-font;
+  color: @base-color;
+}
+.player-hockey-wrap .country img {
+  margin-right: 10px;
+}
+.summary-hockey {
+  background: @match-live-light-base-color;
+  padding: 20px;
+}
+
+player-hockey-wrap .wrapper-circle {
+  display: inline-flex;
+  width: 100%;
+}
+
+.player-hockey-wrap .circle-item { width: 50%; float: left; }
+.player-hockey-wrap .circle-item .circle-bar { width: 42px; height: 42px; position: relative; }
+.player-hockey-wrap .circle-item > * { display: inline-block; vertical-align: middle; }
+.player-hockey-wrap .circle-item .text { padding-left: 6px; font-size: 12px; text-transform: uppercase; color: @player-header-statiscti-text-color; font-family: @secondary-font, sans-serif; }
+.player-hockey-wrap .circle-item .progressbar-text {font-size: 12px; font-family: @secondary-font; color:@player-header-statiscti-text-color !important}
+
+.player-single-wrap .captain-bage {
+    margin: 30px 20px 29px 0;
+    padding: 0 0 0 10px;
+    height: 26px;
+    position: relative;
+    vertical-align: top;
+    line-height: 24px;
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    color:  @light-base-color;
+    font-family: "Montserrat", sans-serif;
+    background: @contrast-color;
+}
+
+.player-single-wrap .captain-bage:before {
+    content: '';
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -10px;
+    transform: skew(-10deg);
+    background: @contrast-color;
+    z-index: -1;
+}
+
+.player-single-wrap .player-name {
+    display: inline-block;
+}

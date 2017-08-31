@@ -1,0 +1,10 @@
+.tab-filters { padding-bottom: 34px; }
+.tab-filters li { padding-right: 30px; display: inline-block; }
+.tab-filters li:last-child { padding-right: 0; }
+.tab-filters li a { padding: 5px 0 12px 0; display: block; position: relative; font-size: 14px; color: @tabfilter-pags-color; font-family: @secondary-font, sans-serif; text-transform: uppercase; }
+.tab-filters  #showall-li {margin-left: 58%}
+
+.tab-filters li a:before { content: ''; position: absolute; width: 0; left: 0; bottom: 0; height: 6px; background: @tabfilter-pags-border-color; transition: all 400ms; }
+.tab-filters li a:hover:before { width: 100%; }
+.tab-filters li.active a:before { width: 100%; }
+
