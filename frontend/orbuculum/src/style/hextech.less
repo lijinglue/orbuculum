@@ -1,15 +1,56 @@
-.hex-logo {
+.hex-nav-bar {
   display: flex;
-  min-height: 80px;
+  height: 80px;
+  padding-left: 30px;
+  @media (max-width: @media_width_s) {
+    height: 40px;
+    padding-left: 15px;
+  }
   align-items: center;
+  background: @color_black_tp;
+  .hex-logo {
+    display: flex;
+    width: 210px;
+    height: 100%;
+    align-items: center;
+    .hex-logo-icon {
+      height: 100%;
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    .hex-logo-text {
+      align-items: center;
+      font-weight: bolder;
+      font-size: @font_size_xlarge;
+
+      span {
+        display: inline-block;
+        margin-left: -20px;
+      }
+      @media (max-width: @media_width_s) {
+        font-size: @font_size_medium;
+        span {
+          display: inline-block;
+          margin-left: -10px;
+        }
+      }
+    }
+  }
 }
 
-.hex-logo-icon {
-  width: 60px;
-}
-
-.hex-logo-text {
-  align-items: center;
-  font-family: "Montserrat", sans-serif;
-  font-size: @font_size_xlarge;
+.hex-container {
+  position: relative;
+  .count-down {
+    font-size: @font_size_medium;
+    span {
+      padding: 5px;
+      background: @color_white_tp_5;
+      border-radius: 10px;
+      font-weight: bold;
+      color: @color_black_tp;
+    }
+  }
 }

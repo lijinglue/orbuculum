@@ -1,16 +1,20 @@
 <template>
   <div id="app">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Montserrat">
     <div class="header">
-      <div class="hex-logo">
-        <div class="hex-logo-icon">
-          <img src="./assets/hextech.png" width="45">
+      <div class="hex-nav-bar">
+        <div class="hex-logo">
+          <div class="hex-logo-icon">
+            <img src="./assets/hextech.png">
+          </div>
+          <div class="hex-logo-text"><span>HEXBET</span></div>
         </div>
-        <div class="hex-logo-text"><span>HEXBET</span></div>
       </div>
-
     </div>
-
-    <router-view></router-view>
+    <div class="hex-container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -25,10 +29,8 @@
   @import "style/hextech.less";
 
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
   }
 </style>
