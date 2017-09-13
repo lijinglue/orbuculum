@@ -29,7 +29,7 @@
   export default {
     name: 'Index',
     mounted () {
-      setInterval(()=>{
+      setInterval(() => {
         this.countdown = this.countdown - 1
       }, 1000)
     },
