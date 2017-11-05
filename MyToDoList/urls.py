@@ -20,17 +20,18 @@ from django.contrib.auth import views as auth_views
 from rest_framework_swagger.views import get_swagger_view
 from django.utils.translation import ugettext_lazy as _
 from MyToDoList import settings
-from settings import ADMIN_SITE_HEADER
 
 schema_view = get_swagger_view(title='api view')
 
-admin.site.site_header = _(ADMIN_SITE_HEADER)
-admin.site.index_title = _(ADMIN_SITE_HEADER)
-admin.site.site_title = _(ADMIN_SITE_HEADER)
+admin.site.site_header = _(settings.ADMIN_SITE_HEADER)
+admin.site.index_title = _(settings.ADMIN_SITE_HEADER)
+admin.site.site_title = _(settings.ADMIN_SITE_HEADER)
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^grappelli/', include('grappelli.urls')),  # grappelli URLS
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^webapp/', include('webapp.urls', namespace='pd')),
+    url(r'^norns/', include('norns.urls', namespace='norns')),
     url(r'^accounts/', include('accounts.urls', namespace='account')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),

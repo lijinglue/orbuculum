@@ -1,3 +1,16 @@
 h1 {
-  color: red;
+  color: #ff6c62;
+}
+
+.norns-dialogue .customScripts textarea {
+    height: 120px;
+}
+
+body.grp-change-list table {
+    margin: 0px !important;
+    border: none;
+    width: 100%;
+}
+.grp-changelist-results .action-checkbox-column {
+    width: 5%;
 }

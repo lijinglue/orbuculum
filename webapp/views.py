@@ -9,7 +9,7 @@ from rest_framework.exceptions import NotFound, ValidationError
 from oauth2_provider.contrib.rest_framework import IsAuthenticatedOrTokenHasScope
 from django.utils.translation import ugettext_lazy as _
 
-from serializers import *
+from .serializers import *
 from constance import config
 
 

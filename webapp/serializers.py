@@ -8,7 +8,7 @@ from constance import config
 
 
 class PositionSerializer(serializers.ModelSerializer):
-    amount = serializers.FloatField(min_value=config.MINIMUM_POSITION, required=True)
+    amount = serializers.FloatField(required=True)
     is_cleared = serializers.BooleanField(read_only=True)
     payoff = serializers.FloatField(read_only=True)
 

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import grappelli
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,6 +30,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'grappelli.dashboard',
+    'grappelli',
+    'storages',
+    'imagekit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,7 +87,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, "global", "templates"),
-            os.path.join(BASE_DIR, 'templates')
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.dirname(grappelli.__file__)
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -166,3 +172,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_STORAGE_BUCKET_NAME = 'norns.media'
+AWS_AUTO_CREATE_BUCKET = True
+GRAPPELLI_INDEX_DASHBOARD = 'MyToDoList.dashboard.CustomIndexDashboard'
