@@ -65,6 +65,14 @@ class OptionInline(admin.StackedInline, CssMixin):
     readonly_fields = ('id',)
 
 
+class CharacterRelInline(admin.StackedInline, CssMixin):
+    extra = 0
+    model = CharacterRel
+    fields = [field.name for field in model._meta.fields]
+    inline_classes = ('grp-collapse grp-open',)
+    readonly_fields = ('id',)
+
+
 class DialogueAdmin(admin.ModelAdmin, CssMixin):
     model = Dialogue
 
@@ -86,6 +94,7 @@ class PlayerAdmin(admin.ModelAdmin, CssMixin):
     avatar_display_m = AdminThumbnail(image_field=cached_admin_thumb_factory('avatar', 'M'))
     avatar_display_m.short_description = 'Thumbnail'
     readonly_fields = ('avatar_display_m',)
+    inlines = (CharacterRelInline, )
 
     autocomplete_lookup_fields = {
         'fk': ['owner']

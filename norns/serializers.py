@@ -32,6 +32,7 @@ class CharacterRelSerializer(serializers.ModelSerializer):
 
 class PlayerSerializer(serializers.ModelSerializer):
     characterRels = CharacterRelSerializer(many=True)
+
     class Meta:
         model = Player
         fields = '__all__'

@@ -57,6 +57,6 @@ class Player(DisplayNameMixin, models.Model):
 
 
 class CharacterRel(models.Model):
-    player = models.ForeignKey(Player, related_name='characterRels')
+    player = models.ForeignKey(Player, unique=True, related_name='characterRels')
     char = models.ForeignKey(Character)
     friendship = models.IntegerField(default=50)

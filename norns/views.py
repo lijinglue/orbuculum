@@ -17,16 +17,27 @@ from constance import config
 
 # Create your views here.
 
-class CharacterView(generics.RetrieveAPIView):
+class CharacterView(generics.ListAPIView):
     serializer_class = CharacterSerializer
+
+    def get_queryset(self):
+        return Character.objects.filter(owner=self.request.user)
 
 
 class PlayerView(generics.RetrieveUpdateAPIView):
     serializer_class = PlayerSerializer
 
+    def get_queryset(self):
+        return Player.objects.filter(owner=self.request.user)
+
 
 class DialogueView(generics.RetrieveAPIView):
     serializer_class = DialogueSerializer
+    queryset = Dialogue.objects.all()
+
 
 class CharacterRelView(generics.RetrieveUpdateAPIView):
     serializer_class = CharacterRelSerializer
+
+    def get_queryset(self):
+        return CharacterRel.objects.all()
