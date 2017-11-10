@@ -25,13 +25,14 @@ SECRET_KEY = '_zw$%w+wl984%qtd3u2p+$l#v%ff$1vnacl*hn+4p605i(jmn7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['leftoright.com']
 
 # Application definition
 
 INSTALLED_APPS = [
     'grappelli.dashboard',
     'grappelli',
+    'social_django',
     'storages',
     'imagekit',
     'django.contrib.admin',
@@ -78,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'MyToDoList.urls'
@@ -97,6 +99,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -153,10 +157,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_dist', 'static_root')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "global", "static"),
 ]
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/api'
 LOGIN_URL = 'rest_framework:login'
 LOGOUT_URL = 'rest_framework:logout'
-ADMIN_SITE_HEADER = "PredictionMarket"
+ADMIN_SITE_HEADER = "Toolbox"
 
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 
@@ -177,3 +181,15 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_STORAGE_BUCKET_NAME = 'norns.media'
 AWS_AUTO_CREATE_BUCKET = True
 GRAPPELLI_INDEX_DASHBOARD = 'MyToDoList.dashboard.CustomIndexDashboard'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1735902089776150'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'f90667dc2f44380b59832fd26e81eb4b'
+
+

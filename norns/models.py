@@ -41,7 +41,7 @@ class Option(DisplayNameMixin, models.Model):
     name = models.CharField(default='unnamed', max_length=64)
     dialogue = models.ForeignKey(Dialogue, related_name='options')
     customScripts = models.CharField(max_length=2048)
-    nextDialogue = models.ForeignKey(Dialogue, null=True, blank=True)
+    nextDialogue = models.ForeignKey(Dialogue, related_name="parentOptions", null=True, blank=True)
 
 
 class Player(DisplayNameMixin, models.Model):
@@ -57,6 +57,6 @@ class Player(DisplayNameMixin, models.Model):
 
 
 class CharacterRel(models.Model):
-    player = models.ForeignKey(Player, unique=True, related_name='characterRels')
+    player = models.ForeignKey(Player, related_name='characterRels')
     char = models.ForeignKey(Character)
     friendship = models.IntegerField(default=50)

@@ -6,6 +6,8 @@ from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from rest_framework import generics
+from rest_framework import views
+from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.exceptions import NotFound, ValidationError
 from oauth2_provider.contrib.rest_framework import IsAuthenticatedOrTokenHasScope
@@ -41,3 +43,10 @@ class CharacterRelView(generics.RetrieveUpdateAPIView):
 
     def get_queryset(self):
         return CharacterRel.objects.all()
+
+
+class StoryView(views.APIView):
+
+    def get(self, request, format=None):
+        print(self.request.user)
+        return Response('hello')

@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r'^login/$', auth_views.login, {'template_name': 'accounts/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'accounts/logout.html'}, name='logout'),
+    url(r'^social/', include('social_django.urls', namespace='social')),
     url(r'^api/$', schema_view)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
