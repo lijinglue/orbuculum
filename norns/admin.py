@@ -84,17 +84,28 @@ class DialogueAdmin(admin.ModelAdmin, CssMixin):
     }
 
 
+class GameStateInline(admin.StackedInline, CssMixin):
+    model = GameState
+    extra = 0
+    can_delete = True
+
+    fields = [field.name for field in model._meta.fields]
+
+    inline_classes = ('grp-collapse grp-open',)
+    readonly_fields = ('id',)
+
+
 class PlayerAdmin(admin.ModelAdmin, CssMixin):
     model = Player
     raw_id_fields = ('owner',)
     avatar_display_s = AdminThumbnail(image_field=cached_admin_thumb_factory('avatar', 'S'))
     avatar_display_s.short_description = 'Thumbnail'
-    list_display = ['__str__', 'avatar_display_s']
+    list_display = ['id', '__str__', 'avatar_display_s']
 
     avatar_display_m = AdminThumbnail(image_field=cached_admin_thumb_factory('avatar', 'M'))
     avatar_display_m.short_description = 'Thumbnail'
     readonly_fields = ('avatar_display_m',)
-    inlines = (CharacterRelInline, )
+    inlines = (CharacterRelInline, GameStateInline,)
 
     autocomplete_lookup_fields = {
         'fk': ['owner']

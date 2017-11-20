@@ -25,7 +25,7 @@ SECRET_KEY = '_zw$%w+wl984%qtd3u2p+$l#v%ff$1vnacl*hn+4p605i(jmn7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['leftoright.com']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -188,8 +188,32 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+'''
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'norns.pipeline.create_player_for_social_user',
+    'social_core.pipeline.user.user_details',
+)'''
 
-SOCIAL_AUTH_FACEBOOK_KEY = '1735902089776150'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'f90667dc2f44380b59832fd26e81eb4b'
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'norns.pipeline.create_player_for_social_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')  # '1735902089776150'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET')  # 'f90667dc2f44380b59832fd26e81eb4b'
 
 

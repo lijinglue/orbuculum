@@ -19,7 +19,7 @@ class Prediction(models.Model):
         (CLOSED, 'CLOSED'),
         (SETTLED, 'SETTLED')
     )
-    owner = models.ForeignKey('auth.User', related_name='predictions', on_delete=models.PROTECT)
+    owner = models.ForeignKey('auth.User', related_name='predictions', null=True, blank=True, on_delete=models.PROTECT)
     content = models.CharField(unique=False, max_length=512, blank=False, default='')
     status = models.IntegerField(choices=STATUS_CHOICES, default=DRAFT)
     start_at = models.DateTimeField('Open at', blank=True, default=timezone.now, editable=True)

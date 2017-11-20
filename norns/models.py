@@ -15,6 +15,8 @@ User.autocomplete_search_fields = autocomplete_search_fields
 
 class DisplayNameMixin(object):
     def __str__(self):
+        if not hasattr(self, 'name'):
+            return '???'
         if self.name == 'unnamed':
             return "{name} {type} {id}".format(name=self.name, type=self._meta.verbose_name, id=self.id)
         else:
@@ -46,8 +48,14 @@ class Option(DisplayNameMixin, models.Model):
 
 class Player(DisplayNameMixin, models.Model):
     owner = models.ForeignKey(User, related_name='players', on_delete=models.PROTECT)
-    avatar = models.ImageField(upload_to='norns.media')
+    avatar = models.ImageField(upload_to='norns.media',
+                               default='norns.media/default-avatar.png')
     name = models.CharField(default='unnamed', max_length=32, unique=True)
+
+
+class GameState(DisplayNameMixin, models.Model):
+    player = models.ForeignKey(Player, related_name='gameStates', on_delete=models.PROTECT)
+    turn = models.IntegerField(default=0)
 
     luck = models.IntegerField(default=50)
     intel = models.IntegerField(default=50)

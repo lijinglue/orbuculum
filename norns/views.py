@@ -30,7 +30,7 @@ class PlayerView(generics.RetrieveUpdateAPIView):
     serializer_class = PlayerSerializer
 
     def get_queryset(self):
-        return Player.objects.filter(owner=self.request.user)
+        return Player.objects.all()
 
 
 class DialogueView(generics.RetrieveAPIView):

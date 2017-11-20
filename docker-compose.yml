@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    image: jli/orbuculum
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "80:8000"
+    environment:
+        - SOCIAL_AUTH_FACEBOOK_KEY=1735902089776150
+        - SOCIAL_AUTH_FACEBOOK_SECRET=f90667dc2f44380b59832fd26e81eb4b
+
