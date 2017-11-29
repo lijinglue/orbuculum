@@ -73,6 +73,11 @@ class CharacterRelInline(admin.StackedInline, CssMixin):
     readonly_fields = ('id',)
 
 
+class StatsModifierAdmin(admin.ModelAdmin, CssMixin):
+    model = StatsModifer
+    list_display = [field.name for field in model._meta.fields if field.name != "id"]
+
+
 class DialogueAdmin(admin.ModelAdmin, CssMixin):
     model = Dialogue
 
@@ -82,6 +87,7 @@ class DialogueAdmin(admin.ModelAdmin, CssMixin):
     autocomplete_lookup_fields = {
         'fk': ['character']
     }
+
 
 
 class GameStateInline(admin.StackedInline, CssMixin):
@@ -122,6 +128,7 @@ class CharacterAdmin(admin.ModelAdmin, CssMixin):
     readonly_fields = ('avatar_display_m',)
 
 
+admin.site.register(StatsModifer, StatsModifierAdmin)
 admin.site.register(Player, PlayerAdmin)
 admin.site.register(Dialogue, DialogueAdmin)
 admin.site.register(Character, CharacterAdmin)
