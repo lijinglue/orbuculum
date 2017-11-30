@@ -4,7 +4,7 @@ import sys
 
 
 def manage(argv):
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "MyToDoList.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orbuculum.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError:
