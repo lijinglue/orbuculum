@@ -17,7 +17,6 @@ User.autocomplete_search_fields = autocomplete_search_fields
 
 def createDefaultStatsMap():
     return json.dumps({
-        "yanzhi": 10,
         "charisma": 10,
         "luck": 10,
         "fortune": 10,
